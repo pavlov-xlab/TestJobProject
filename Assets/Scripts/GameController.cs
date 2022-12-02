@@ -7,12 +7,11 @@ public class GameController : MonoBehaviour
 	[SerializeField]
 	private StoneSpawner m_spawner;
 
+	[SerializeField]
+	private CloudController m_cloudController;
+
 	public void Update()
 	{
-		System.Object obj;
-
-
-
 		if (Input.GetKeyDown(KeyCode.X))
 		{
 			Debug.Log("Key X pressed ");
@@ -25,6 +24,12 @@ public class GameController : MonoBehaviour
 			{
 				Debug.LogError("m_spawner == null");
 			}
+		}
+
+		if (Input.GetKeyDown(KeyCode.Z))
+		{
+			Debug.Log("Key Z pressed ");
+			m_cloudController.Action();
 		}
 	}
 }

@@ -56,13 +56,20 @@ public class FreeCamera : MonoBehaviour
 		float h = Input.GetAxis("Horizontal");
 		float v = Input.GetAxis("Vertical");
 
-		float rotX = mainCamera.transform.localEulerAngles.y + Input.GetAxis("Mouse X") * sensitivity;
-		rotY += Input.GetAxis("Mouse Y") * sensitivity;
-		rotY = Mathf.Clamp(rotY, -90, 90);
+		// float rotX = mainCamera.transform.localEulerAngles.y + Input.GetAxis("Mouse X") * sensitivity;
+		// rotY += Input.GetAxis("Mouse Y") * sensitivity;
+		// rotY = Mathf.Clamp(rotY, -90, 90);
 
+		// if (Input.GetKey(KeyCode.Mouse1))
+		// {
+		// 	mainCamera.transform.localEulerAngles = new Vector3(-rotY, rotX, 0);
+		// }
+
+		float rotX = Input.GetAxis("Mouse X") * sensitivity;
+		float rotY = Input.GetAxis("Mouse Y") * sensitivity;
 		if (Input.GetKey(KeyCode.Mouse1))
 		{
-			mainCamera.transform.localEulerAngles = new Vector3(-rotY, rotX, 0);
+			mainCamera.transform.localEulerAngles += new Vector3(-rotY, rotX, 0);
 		}
 
 		direction = new Vector3(h, 0, v);
