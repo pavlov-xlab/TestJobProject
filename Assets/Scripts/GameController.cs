@@ -10,6 +10,9 @@ public class GameController : MonoBehaviour
 	[SerializeField]
 	private CloudController m_cloudController;
 
+	[SerializeField]
+	private ToolsChange m_toolsChange;
+
 	public void Update()
 	{
 		if (Input.GetKeyDown(KeyCode.X))
@@ -30,6 +33,12 @@ public class GameController : MonoBehaviour
 		{
 			Debug.Log("Key Z pressed ");
 			m_cloudController.Action();
+		}
+
+		if (Input.GetKeyDown(KeyCode.Space))
+		{
+			Debug.Log("Key Space pressed ");
+			m_toolsChange.Action();
 		}
 	}
 }
