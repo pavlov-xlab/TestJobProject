@@ -5323,14 +5323,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 674816976}
-  m_LocalRotation: {x: 0.029686121, y: -0.7255613, z: 0.031361476, w: 0.6868013}
-  m_LocalPosition: {x: 69.27, y: 24.67, z: 53}
+  m_LocalRotation: {x: 0.020326119, y: -0.92211056, z: 0.09842682, w: 0.3736459}
+  m_LocalPosition: {x: 65.62, y: 23.99, z: 56.02}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 4.95, y: -93.144, z: 0}
+  m_LocalEulerAnglesHint: {x: 11.345, y: -135.674, z: 2.108}
 --- !u!1 &675451111 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1069567032315564, guid: bdf8e7438a7816543998181bd3067573, type: 3}
@@ -10489,6 +10489,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1377133470}
   - component: {fileID: 1377133471}
+  - component: {fileID: 1377133472}
   m_Layer: 0
   m_Name: Cube
   m_TagString: Untagged
@@ -10524,6 +10525,33 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &1377133472
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1377133469}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fc5cbbc2f28936c468feb4e0deec21f3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  onCollisionStone:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1401151516}
+        m_TargetAssemblyTypeName: Game.GameController, Assembly-CSharp
+        m_MethodName: OnCollisionStone
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1001 &1382811773
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -10756,7 +10784,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_stoneSpawner: {fileID: 514404799}
-  m_delay: 1
+  m_delay: 2
+  m_power: 10
 --- !u!4 &1401151517
 Transform:
   m_ObjectHideFlags: 0
@@ -11754,7 +11783,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_tool: {fileID: 137926933}
   range: 30
-  speed: 200
+  speed: 500
 --- !u!1 &1556375767 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1694894201118028, guid: 6dcae7204dd466c4c862bc640ea7c02e, type: 3}
@@ -16377,7 +16406,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8326605680545251334}
   m_LocalRotation: {x: 0.65721667, y: 0.24943069, z: 0.6745453, w: 0.22547565}
-  m_LocalPosition: {x: 0.066, y: 0.987, z: 0.226}
+  m_LocalPosition: {x: 0, y: 0.987, z: 0.226}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:

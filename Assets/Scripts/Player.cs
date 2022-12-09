@@ -7,7 +7,6 @@ public class Player : MonoBehaviour
 	[SerializeField]
 	private Transform m_tool;
 
-
 	public float range = 30f;
 	public float speed = 1f;
 	private float m_timer = 0f;
