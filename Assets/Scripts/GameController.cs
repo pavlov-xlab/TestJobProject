@@ -52,8 +52,12 @@ namespace Game
 			{
 				stone.SetAffect(false);
 				var contact = collision.contacts[0];
-				var body = contact.otherCollider.GetComponent<Rigidbody>();
-				body.AddForce(contact.normal * m_power, ForceMode.Impulse);
+
+				var stick = contact.thisCollider.GetComponent<Stick>();
+				
+				var body = stone.GetComponent<Rigidbody>();
+				body.AddForce(stick.dir * m_power, ForceMode.Impulse);
+				
 				Physics.IgnoreCollision(contact.thisCollider, contact.otherCollider, true);
 			}
 		}
