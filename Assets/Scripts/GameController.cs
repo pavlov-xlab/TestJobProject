@@ -15,6 +15,11 @@ namespace Game
 		private float m_delay = 1f;
 		[SerializeField] private float m_power = 100f;
 
+		[SerializeField]
+		private UIScorePanel m_scorePanel;
+
+		private int m_score = 0;
+
 		private void Awake()
 		{
 
@@ -46,6 +51,11 @@ namespace Game
 			}
 		}
 
+		public void RefreshScore()
+		{
+			m_scorePanel.SetScore(m_score);
+		}
+
 		public void OnCollisionStone(Collision collision)
 		{
 			if (collision.gameObject.TryGetComponent<Stone>(out var stone))
@@ -57,7 +67,10 @@ namespace Game
 				
 				var body = stone.GetComponent<Rigidbody>();
 				body.AddForce(stick.dir * m_power, ForceMode.Impulse);
-				
+
+				m_score++;
+				RefreshScore();
+
 				Physics.IgnoreCollision(contact.thisCollider, contact.otherCollider, true);
 			}
 		}
