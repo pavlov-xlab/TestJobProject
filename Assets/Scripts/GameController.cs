@@ -34,6 +34,8 @@ namespace Game
 
 		public void MainMenuState()
 		{
+			ClearStones();
+
 			enabled = false;
 			m_mainMenuPanel.SetActive(true);
 			m_gamePanel.SetActive(false);
@@ -42,11 +44,6 @@ namespace Game
 
 		public void GameState()
 		{
-			foreach (GameObject stone in m_stones)
-			{
-				Destroy(stone);
-			}
-
 			enabled = true;
 			m_mainMenuPanel.SetActive(false);
 			m_gamePanel.SetActive(true);
@@ -67,6 +64,15 @@ namespace Game
 			Debug.Log("Game Over");
 
 			MainMenuState();
+		}
+
+		private void ClearStones()
+		{
+			foreach (GameObject stone in m_stones)
+			{
+				Destroy(stone);
+			}
+			m_stones.Clear();
 		}
 
 		private void Update()
