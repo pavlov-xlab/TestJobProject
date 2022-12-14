@@ -11285,6 +11285,7 @@ MonoBehaviour:
   m_scorePanel: {fileID: 687553419}
   m_mainMenuPanel: {fileID: 1681610066}
   m_gamePanel: {fileID: 1330115249}
+  m_settings: {fileID: 11400000, guid: e2816e27193cd704bbd26df686adc5d7, type: 2}
 --- !u!4 &1401151517
 Transform:
   m_ObjectHideFlags: 0

@@ -1,5 +1,3 @@
-using System;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -10,9 +8,7 @@ namespace Game
 	{
 		[SerializeField]
 		private StoneSpawner m_stoneSpawner;
-		private float m_timer = 0f;
-		[SerializeField]
-		private float m_delay = 1f;
+
 		[SerializeField] private float m_power = 100f;
 
 		[SerializeField]
@@ -21,11 +17,16 @@ namespace Game
 		private GameObject m_mainMenuPanel;
 		[SerializeField]
 		private GameObject m_gamePanel;
+		[SerializeField]
+		private GameSettings m_settings;
+
+
 		private List<GameObject> m_stones = new();
-
-
 		private int m_score = 0;
 		private int m_maxScore = 0;
+		private float m_timer = 0f;
+		private float m_delay = 0f;
+		private float m_maxDelay = 0f;
 
 		private void Start()
 		{
@@ -42,8 +43,18 @@ namespace Game
 			RefreshScore(m_maxScore);
 		}
 
+		private float CalcNextDelay()
+		{
+			var delay = Random.Range(m_settings.minDelay, m_maxDelay);
+			Debug.Log($"CalcNextDelay - delay: {delay} - maxDelay: {m_maxDelay}");
+			return delay;
+		}
+
 		public void GameState()
 		{
+			m_delay = CalcNextDelay();
+			m_maxDelay = m_settings.maxDelay;
+
 			enabled = true;
 			m_mainMenuPanel.SetActive(false);
 			m_gamePanel.SetActive(true);
@@ -83,6 +94,9 @@ namespace Game
 				var stone = m_stoneSpawner.Spawn();
 				m_stones.Add(stone);
 				m_timer -= m_delay;
+
+				m_delay = CalcNextDelay();
+				m_maxDelay -= m_settings.stepDelay;
 			}
 		}
 
