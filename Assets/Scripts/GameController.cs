@@ -17,16 +17,42 @@ namespace Game
 
 		[SerializeField]
 		private UIScorePanel m_scorePanel;
+		[SerializeField]
+		private GameObject m_mainMenuPanel;
+		[SerializeField]
+		private GameObject m_gamePanel;
+		private List<GameObject> m_stones = new();
+
 
 		private int m_score = 0;
-
-		private void Awake()
-		{
-
-		}
+		private int m_maxScore = 0;
 
 		private void Start()
 		{
+			MainMenuState();
+		}
+
+		public void MainMenuState()
+		{
+			enabled = false;
+			m_mainMenuPanel.SetActive(true);
+			m_gamePanel.SetActive(false);
+			RefreshScore(m_maxScore);
+		}
+
+		public void GameState()
+		{
+			foreach (GameObject stone in m_stones)
+			{
+				Destroy(stone);
+			}
+
+			enabled = true;
+			m_mainMenuPanel.SetActive(false);
+			m_gamePanel.SetActive(true);
+			m_score = 0;
+			RefreshScore(m_score);
+
 			StartGame();
 		}
 
@@ -39,6 +65,8 @@ namespace Game
 		{
 			GameEvents.onGameOver -= OnGameOver;
 			Debug.Log("Game Over");
+
+			MainMenuState();
 		}
 
 		private void Update()
@@ -46,14 +74,15 @@ namespace Game
 			m_timer += Time.deltaTime;
 			if (m_timer >= m_delay)
 			{
-				m_stoneSpawner.Spawn();
+				var stone = m_stoneSpawner.Spawn();
+				m_stones.Add(stone);
 				m_timer -= m_delay;
 			}
 		}
 
-		public void RefreshScore()
+		public void RefreshScore(int score)
 		{
-			m_scorePanel.SetScore(m_score);
+			m_scorePanel.SetScore(score);
 		}
 
 		public void OnCollisionStone(Collision collision)
@@ -69,7 +98,8 @@ namespace Game
 				body.AddForce(stick.dir * m_power, ForceMode.Impulse);
 
 				m_score++;
-				RefreshScore();
+				m_maxScore = Mathf.Max(m_score, m_maxScore);
+				RefreshScore(m_score);
 
 				Physics.IgnoreCollision(contact.thisCollider, contact.otherCollider, true);
 			}
