@@ -3857,9 +3857,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1401151516}
-        m_TargetAssemblyTypeName: Game.GameController, Assembly-CSharp
-        m_MethodName: GameState
+      - m_Target: {fileID: 614414983}
+        m_TargetAssemblyTypeName: Game.MainMenuState, Assembly-CSharp
+        m_MethodName: PlayGame
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -4695,6 +4695,52 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4586821900076392, guid: ae9772ea62bbc724eb9b8ef81109f733, type: 3}
   m_PrefabInstance: {fileID: 605774406}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &614414981
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 614414982}
+  - component: {fileID: 614414983}
+  m_Layer: 0
+  m_Name: MainMenuState
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &614414982
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 614414981}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1401151517}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &614414983
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 614414981}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bd3a1f314191e18449dbd859316053ae, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_gameController: {fileID: 1401151516}
+  m_mainMenuPanel: {fileID: 1681610066}
 --- !u!1001 &615697915
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -11036,8 +11082,8 @@ MonoBehaviour:
   onCollisionStone:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1401151516}
-        m_TargetAssemblyTypeName: Game.GameController, Assembly-CSharp
+      - m_Target: {fileID: 1917295015}
+        m_TargetAssemblyTypeName: Game.GameState, Assembly-CSharp
         m_MethodName: OnCollisionStone
         m_Mode: 0
         m_Arguments:
@@ -11279,13 +11325,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8ba2d31267b4024408c8f743f54b07ed, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_stoneSpawner: {fileID: 514404799}
-  m_delay: 2
-  m_power: 10
   m_scorePanel: {fileID: 687553419}
-  m_mainMenuPanel: {fileID: 1681610066}
-  m_gamePanel: {fileID: 1330115249}
-  m_settings: {fileID: 11400000, guid: e2816e27193cd704bbd26df686adc5d7, type: 2}
+  m_mainMenuState: {fileID: 614414983}
+  m_gameState: {fileID: 1917295015}
 --- !u!4 &1401151517
 Transform:
   m_ObjectHideFlags: 0
@@ -11297,7 +11339,9 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 614414982}
+  - {fileID: 1917295016}
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -15480,6 +15524,55 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4208458315195486, guid: c96016c34e7be62488e588470988ef5b, type: 3}
   m_PrefabInstance: {fileID: 1909351191}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1917295014
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1917295016}
+  - component: {fileID: 1917295015}
+  m_Layer: 0
+  m_Name: GameState
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1917295015
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1917295014}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9414ec3c476fe844d9daad053b5e6601, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_power: 15
+  m_gameController: {fileID: 1401151516}
+  m_settings: {fileID: 11400000, guid: e2816e27193cd704bbd26df686adc5d7, type: 2}
+  m_stoneSpawner: {fileID: 514404799}
+  m_gamePanel: {fileID: 1330115249}
+--- !u!4 &1917295016
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1917295014}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1401151517}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1917980804
 PrefabInstance:
   m_ObjectHideFlags: 0

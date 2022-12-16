@@ -7,134 +7,58 @@ namespace Game
 	public class GameController : MonoBehaviour
 	{
 		[SerializeField]
-		private StoneSpawner m_stoneSpawner;
-
-		[SerializeField] private float m_power = 100f;
-
-		[SerializeField]
 		private UIScorePanel m_scorePanel;
-		[SerializeField]
-		private GameObject m_mainMenuPanel;
-		[SerializeField]
-		private GameObject m_gamePanel;
-		[SerializeField]
-		private GameSettings m_settings;
 
-
-		private List<GameObject> m_stones = new();
 		private int m_score = 0;
 		private int m_maxScore = 0;
-		private float m_timer = 0f;
-		private float m_delay = 0f;
-		private float m_maxDelay = 0f;
+
+		public int maxScore => m_maxScore;
+		public int score => m_score;
+
+		[SerializeField] private MainMenuState m_mainMenuState;
+		[SerializeField] private GameState m_gameState;
 
 		private void Start()
 		{
 			MainMenuState();
 		}
 
-		public void MainMenuState()
+		private void MainMenuState()
 		{
-			ClearStones();
-
-			enabled = false;
-			m_mainMenuPanel.SetActive(true);
-			m_gamePanel.SetActive(false);
-			RefreshScore(m_maxScore);
+			m_mainMenuState.enabled = true;
+			m_gameState.enabled = false;
 		}
 
-		private float CalcNextDelay()
+		private void GameState()
 		{
-			var delay = Random.Range(m_settings.minDelay, m_maxDelay);
-			return delay;
+			m_mainMenuState.enabled = false;
+			m_gameState.enabled = true;
 		}
 
-		public void GameState()
+		public void StartGame()
 		{
-			m_delay = CalcNextDelay();
-			m_maxDelay = m_settings.maxDelay;
-
-			enabled = true;
-			m_mainMenuPanel.SetActive(false);
-			m_gamePanel.SetActive(true);
-			m_score = 0;
-			RefreshScore(m_score);
-
-			StartGame();
+			GameState();
 		}
 
-		private void StartGame()
+		public void GameOver()
 		{
-			GameEvents.onCollisionStones += CheckGameOver;
-		}
-
-		private void OnGameOver()
-		{
-			GameEvents.onCollisionStones -= CheckGameOver;
-			Debug.Log("Game Over");
-
 			MainMenuState();
 		}
 
-		private void CheckGameOver(Stone stone1, Stone stone2)
+		public void IncScore()
 		{
-			if (stone1.isAffect && stone2.isAffect)
-			{
-				OnGameOver();
-			}
+			m_score++;
+			m_maxScore = Mathf.Max(m_score, m_maxScore);
 		}
 
-		private void ClearStones()
+		public void ResetScore()
 		{
-			foreach (GameObject stone in m_stones)
-			{
-				Destroy(stone);
-			}
-			m_stones.Clear();
-		}
-
-		private void Update()
-		{
-			m_timer += Time.deltaTime;
-			if (m_timer >= m_delay)
-			{
-				var stone = m_stoneSpawner.Spawn();
-				m_stones.Add(stone);
-				m_timer -= m_delay;
-
-				m_delay = CalcNextDelay();
-				m_maxDelay = Mathf.Max(m_settings.minDelay, m_maxDelay - m_settings.stepDelay);
-			}
+			m_score = 0;
 		}
 
 		public void RefreshScore(int score)
 		{
 			m_scorePanel.SetScore(score);
-		}
-
-		public void OnCollisionStone(Collision collision)
-		{
-			if (collision.gameObject.TryGetComponent<Stone>(out var stone))
-			{
-				stone.isAffect = false;
-				var contact = collision.contacts[0];
-
-				var stick = contact.thisCollider.GetComponent<Stick>();
-				
-				var body = stone.GetComponent<Rigidbody>();
-				body.AddForce(stick.dir * m_power, ForceMode.Impulse);
-
-				m_score++;
-				m_maxScore = Mathf.Max(m_score, m_maxScore);
-				RefreshScore(m_score);
-
-				Physics.IgnoreCollision(contact.thisCollider, contact.otherCollider, true);
-			}
-		}
-
-		private void OnDestroy()
-		{
-			GameEvents.onCollisionStones -= CheckGameOver;
 		}
 	}
 }
