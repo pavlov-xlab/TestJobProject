@@ -12,4 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1c4c3a480fc4bb248935c6752afc55b4, type: 3}
   m_Name: GameSettings
   m_EditorClassIdentifier: 
-  num: 10
+  m_minDelay: 1
+  m_maxDelay: 5
+  m_stepDelay: 0.25

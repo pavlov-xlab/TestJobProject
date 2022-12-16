@@ -66,15 +66,24 @@ namespace Game
 
 		private void StartGame()
 		{
-			GameEvents.onGameOver += OnGameOver;
+			GameEvents.onCollisionStones += CheckGameOver;
 		}
 
 		private void OnGameOver()
 		{
-			GameEvents.onGameOver -= OnGameOver;
+			GameEvents.onCollisionStones -= CheckGameOver;
 			Debug.Log("Game Over");
 
 			MainMenuState();
+		}
+
+		private void CheckGameOver(Stone stone1, Stone stone2)
+		{
+			if (stone1.isAffect && stone2.isAffect)
+			{
+				//LOSE
+				OnGameOver();
+			}
 		}
 
 		private void ClearStones()
@@ -96,7 +105,7 @@ namespace Game
 				m_timer -= m_delay;
 
 				m_delay = CalcNextDelay();
-				m_maxDelay -= m_settings.stepDelay;
+				m_maxDelay = Mathf.Max(m_settings.minDelay, m_maxDelay - m_settings.stepDelay);
 			}
 		}
 
@@ -109,7 +118,7 @@ namespace Game
 		{
 			if (collision.gameObject.TryGetComponent<Stone>(out var stone))
 			{
-				stone.SetAffect(false);
+				stone.isAffect = false;
 				var contact = collision.contacts[0];
 
 				var stick = contact.thisCollider.GetComponent<Stick>();
@@ -127,7 +136,7 @@ namespace Game
 
 		private void OnDestroy()
 		{
-			GameEvents.onGameOver -= OnGameOver;
+			GameEvents.onCollisionStones -= CheckGameOver;
 		}
 	}
 }
