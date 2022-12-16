@@ -9,7 +9,7 @@ namespace Game
 		[SerializeField]
 		private Rigidbody m_rigidbody;
 
-		public bool isAffect { set; get; }
+		public bool isAffect { set; get; } = true;
 
 		private void Awake()
 		{

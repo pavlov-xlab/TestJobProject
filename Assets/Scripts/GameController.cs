@@ -46,7 +46,6 @@ namespace Game
 		private float CalcNextDelay()
 		{
 			var delay = Random.Range(m_settings.minDelay, m_maxDelay);
-			Debug.Log($"CalcNextDelay - delay: {delay} - maxDelay: {m_maxDelay}");
 			return delay;
 		}
 
@@ -81,7 +80,6 @@ namespace Game
 		{
 			if (stone1.isAffect && stone2.isAffect)
 			{
-				//LOSE
 				OnGameOver();
 			}
 		}
